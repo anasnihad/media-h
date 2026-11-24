@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="description" content="ميديا اتش – موقع إخباري تقني مستقل من عمان">
+<title>ميديا اتش | أخبار التقنية</title>
+<style>
+/*
+VOICE: a serious Arabic newsroom (Petra / Al Jazeera register) with a night-broadcast edge; calm, exact, attributed.
+IDEA: a glass control room at night: hairline crosshair rules with node dots, pill tags, ghost masthead lettering.
+PICTURE: the lead story framed like a lit studio monitor beside a giant outlined "ميديا اتش", the stepped-H mark glowing.
+COLOUR and TYPE: night #03050C dominant, royal glass blue #1F4DFF support, ice #AFCBFF sharp accent; Alexandria for headlines, Noto Naskh Arabic for reading.
+LAYOUT: masthead, breaking ticker, lead + rail, latest grid with most-read, vertical video strip, publisher band; article = text column + sticky video.
+*/
+@font-face{font-family:Alx;src:url(f/alx-ar-400.woff2) format("woff2");font-weight:400;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:Alx;src:url(f/alx-ar-600.woff2) format("woff2");font-weight:600;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:Alx;src:url(f/alx-ar-800.woff2) format("woff2");font-weight:800;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:Alx;src:url(f/alx-la-400.woff2) format("woff2");font-weight:400}
+@font-face{font-family:Alx;src:url(f/alx-la-600.woff2) format("woff2");font-weight:600}
+@font-face{font-family:Alx;src:url(f/alx-la-800.woff2) format("woff2");font-weight:800}
+@font-face{font-family:Nsk;src:url(f/nsk-ar-400.woff2) format("woff2");font-weight:400;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:Nsk;src:url(f/nsk-ar-700.woff2) format("woff2");font-weight:700;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FEFC}
+:root{color-scheme:dark;--bg:#03050C;--bg2:#070C1B;--panel:rgba(18,32,74,.38);--panel2:rgba(12,20,46,.72);--line:rgba(130,168,255,.16);--line2:rgba(130,168,255,.32);--ink:#EEF3FF;--mute:#97A4C4;--royal:#1F4DFF;--azure:#3D8BFF;--ice:#AFCBFF;--steel:#2E6FB0;--h:Alx,"Segoe UI",Tahoma,sans-serif;--b:Nsk,Alx,"Times New Roman",serif}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:132px;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--h);overflow-x:clip;
+ background-image:radial-gradient(900px 520px at 85% -120px,rgba(31,77,255,.35),transparent 70%),radial-gradient(700px 500px at 0% 40%,rgba(46,111,176,.16),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px);background-size:auto,auto,100% 220px;background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+/* header */
+.top{border-bottom:1px solid var(--line);font-size:13px;color:var(--mute)}
+.top .wrap{display:flex;justify-content:space-between;gap:12px;padding-block:8px;flex-wrap:wrap}
+header.mast{position:sticky;top:0;z-index:20;background:rgba(3,5,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.mast .wrap{display:flex;align-items:center;gap:18px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;margin-inline-end:auto}
+.brand svg{width:42px;height:42px;flex:none}
+.brand b{display:block;font-weight:800;font-size:24px;line-height:1}
+.brand small{display:block;font-size:11px;color:var(--ice);letter-spacing:.06em;margin-top:4px;direction:ltr;text-align:right}
+nav.main{display:flex;gap:6px;flex-wrap:wrap}
+nav.main a{padding:9px 14px;border-radius:999px;font-size:14px;color:var(--mute);border:1px solid transparent;min-height:40px;display:inline-flex;align-items:center}
+nav.main a:hover{color:var(--ink);border-color:var(--line)}
+nav.main a.on{color:var(--ink);background:var(--panel);border-color:var(--line2)}
+.ticker{border-bottom:1px solid var(--line);background:rgba(10,18,44,.55)}
+.ticker .wrap{display:flex;align-items:center;gap:14px;padding-block:9px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);font-size:13px;white-space:nowrap}
+.pill i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px var(--azure)}
+.pill.solid{background:#fff;color:#04081A;border-color:#fff;font-weight:600}
+.pill.solid i{background:var(--royal);box-shadow:0 0 8px var(--royal)}
+.tk{overflow:hidden;flex:1;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tk div{display:flex;gap:48px;width:max-content;animation:tk 60s linear infinite}
+.tk a{font-size:14px;color:var(--ink);white-space:nowrap}.tk a:hover{color:var(--ice)}
+.tk div:hover{animation-play-state:paused}
+@keyframes tk{to{transform:translateX(50%)}}
+/* hero */
+.hero{position:relative;overflow-x:clip;padding:clamp(28px,4vw,56px) 0 clamp(24px,3vw,40px)}
+.ghost{position:absolute;inset-inline:0;top:6px;text-align:center;font-weight:800;font-size:clamp(84px,17vw,250px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(140,180,255,.16);pointer-events:none;user-select:none;white-space:nowrap;overflow:hidden}
+.hgrid{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:clamp(20px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(30px,3.6vw,48px);line-height:1.25;font-weight:800;margin:16px 0 14px;text-wrap:balance}
+.hero h1 a:hover{color:var(--ice)}
+.dek{font-family:var(--b);font-size:18px;line-height:1.85;color:#C9D3EA;margin:0 0 20px;max-width:62ch}
+.by{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mute);flex-wrap:wrap}
+.by img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--line2)}
+.by b{color:var(--ink);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 8px 0 20px;padding-inline:20px 8px;border-radius:999px;background:var(--panel2);border:1px solid var(--line2);font-weight:600;font-size:15px;cursor:pointer}
+.btn span{width:32px;height:32px;border-radius:50%;background:#fff;color:#04081A;display:grid;place-items:center;font-size:15px}
+.btn:hover{border-color:var(--ice)}
+.monitor{position:relative;border-radius:22px;padding:10px;background:linear-gradient(160deg,rgba(175,203,255,.28),rgba(31,77,255,.12) 40%,rgba(255,255,255,.04));border:1px solid var(--line2);box-shadow:0 30px 90px -30px rgba(31,77,255,.7)}
+.monitor img{width:100%;object-fit:cover;border-radius:14px}
+.monitor .play{position:absolute;inset-inline-start:26px;bottom:26px}
+.node{position:absolute;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 12px var(--azure)}
+.rule-v{position:absolute;width:1px;background:linear-gradient(transparent,var(--line2),transparent)}
+.rule-h{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+/* sections */
+.sec{padding:clamp(28px,4vw,56px) 0;border-top:1px solid var(--line)}
+.sh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.sh h2{font-size:clamp(22px,2.4vw,30px);margin:0;font-weight:800;display:flex;align-items:center;gap:12px}
+.sh h2::before{content:"";width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 14px var(--azure)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(20px,3vw,40px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;border-radius:18px;background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--line2);transform:translateY(-3px)}
+.card img{width:100%;object-fit:cover}
+.feat .card:first-child{grid-column:1/-1;flex-direction:row}.feat .card:first-child img{width:52%;aspect-ratio:auto;min-height:260px}.feat .card:first-child h3{font-size:22px}.feat .card:first-child p{-webkit-line-clamp:4}
+.card .in{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:18px;line-height:1.5;margin:0;font-weight:600;text-wrap:balance}
+.card p{font-family:var(--b);color:var(--mute);font-size:15px;line-height:1.8;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--mute);flex-wrap:wrap;margin-top:auto}
+.tag{font-size:12.5px;color:var(--ice);font-weight:600}
+.rail{display:flex;flex-direction:column;gap:22px}
+.box{border-radius:18px;border:1px solid var(--line);background:var(--panel2);padding:20px}
+.box h3{margin:0 0 12px;font-size:17px;font-weight:800}
+.mr{list-style:none;margin:0;padding:0;counter-reset:m}
+.mr li{counter-increment:m;display:grid;grid-template-columns:34px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+.mr li:first-child{border-top:0}
+.mr li::before{content:counter(m);font-weight:800;font-size:22px;color:var(--azure);line-height:1.3}
+.mr a{font-size:15px;line-height:1.6}.mr a:hover{color:var(--ice)}
+.pub{display:flex;gap:14px;align-items:center}
+.pub img{width:64px;height:64px;border-radius:16px;object-fit:cover;border:1px solid var(--line2)}
+.pub p{margin:8px 0 0;font-family:var(--b);font-size:14.5px;line-height:1.8;color:var(--mute)}
+/* video strip */
+.strip{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin}
+.vc{flex:0 0 min(230px,62vw);scroll-snap-align:start;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:9/16;background:var(--bg2)}
+.vc img{width:100%;height:100%;object-fit:cover}
+.vc .cap{position:absolute;inset:auto 0 0;padding:44px 14px 14px;background:linear-gradient(transparent,rgba(3,5,12,.95));font-size:15px;line-height:1.5;font-weight:600}
+.vc .pl{position:absolute;top:12px;inset-inline-start:12px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);cursor:pointer;font-size:18px}
+/* article */
+.crumb{font-size:13px;color:var(--mute);display:flex;gap:8px;flex-wrap:wrap;padding-top:26px}
+.crumb a:hover{color:var(--ink)}
+.ah{padding:14px 0 24px;border-bottom:1px solid var(--line)}
+.ah h1{font-size:clamp(28px,3.4vw,44px);line-height:1.35;font-weight:800;margin:14px 0;max-width:30ch;text-wrap:balance}
+.share{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.share input{flex:1;min-width:200px;max-width:460px;height:44px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--mute);padding:0 16px;font:14px var(--h);direction:ltr}
+.agrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(24px,4vw,56px);padding:30px 0 10px;align-items:start}
+.body{font-family:var(--b);font-size:19px;line-height:2;max-width:68ch}
+.body p{margin:0 0 1.15em}
+.body .lead{font-size:20.5px;color:#fff}
+.body .lead b{font-family:var(--h);font-weight:800;color:var(--ice)}
+.body h2{font-family:var(--h);font-size:23px;font-weight:800;margin:1.6em 0 .6em;line-height:1.4}
+.vbox{position:sticky;top:150px}
+.vframe{border-radius:20px;padding:8px;background:linear-gradient(160deg,rgba(175,203,255,.25),rgba(31,77,255,.1));border:1px solid var(--line2);box-shadow:0 26px 70px -30px rgba(31,77,255,.75)}
+.vframe video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#000;object-fit:cover}
+.vbox figcaption{font-size:13px;color:var(--mute);margin-top:10px;line-height:1.7}
+.src{margin:26px 0 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);background:var(--panel2);max-width:68ch}
+.src h3{margin:0 0 10px;font-size:17px}
+.src ol{margin:0;padding-inline-start:20px;font-size:15px;line-height:1.9}
+.src a{color:var(--ice);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(175,203,255,.4);overflow-wrap:anywhere}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:13px;color:var(--mute);margin-top:14px}
+/* publisher + identity */
+.phero{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(22px,4vw,56px);align-items:center;padding:40px 0}
+.phero .monitor img{aspect-ratio:1}
+.phero h1{font-size:clamp(30px,3.6vw,46px);margin:12px 0 6px;font-weight:800;line-height:1.25}
+.role{color:var(--ice);font-weight:600;margin:0 0 14px}
+.tl{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line2)}
+.tl li{position:relative;padding:0 22px 22px}
+.tl li::before{content:"";position:absolute;inset-inline-start:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 10px var(--azure)}
+.tl b{display:block;font-size:17px}.tl span{font-size:13px;color:var(--ice)}
+.tl p{font-family:var(--b);color:var(--mute);margin:6px 0 0;line-height:1.85;font-size:15.5px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.aw{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.aw li{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);font-family:var(--b);line-height:1.8;font-size:15.5px}
+.aw b{font-family:var(--h);display:block;font-size:15px;color:var(--ink);margin-bottom:2px}
+.idlogo{display:grid;place-items:center;min-height:360px;border-radius:24px;border:1px solid var(--line2);background:radial-gradient(500px 300px at 50% 40%,rgba(31,77,255,.35),transparent 70%),var(--bg2);position:relative;overflow:hidden}
+.lockup{display:flex;align-items:center;gap:18px}
+.lockup svg{width:clamp(90px,14vw,150px);height:auto}
+.lockup b{font-size:clamp(44px,7vw,84px);font-weight:800;line-height:1}
+.lockup small{display:block;direction:ltr;text-align:right;color:var(--ice);font-size:clamp(14px,1.8vw,20px);letter-spacing:.08em;margin-top:8px}
+.vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+.var{border-radius:18px;min-height:170px;display:grid;place-items:center;border:1px solid var(--line)}
+.var .lockup svg{width:56px}.var .lockup b{font-size:32px}.var .lockup small{font-size:11px}
+.sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px}
+.sw div{border-radius:16px;border:1px solid var(--line);overflow:hidden;background:var(--panel2)}
+.sw i{display:block;height:96px}
+.sw p{margin:0;padding:10px 12px;font-size:13px;line-height:1.6}.sw p b{display:block;font-size:14px}
+.sw code{direction:ltr;display:inline-block;color:var(--ice)}
+.spec{padding:22px;border-radius:18px;border:1px solid var(--line);background:var(--panel)}
+.spec .big{font-size:clamp(34px,4vw,52px);font-weight:800;line-height:1.2}
+.spec .rd{font-family:var(--b);font-size:19px;line-height:2}
+.monitor img{aspect-ratio:16/10;object-position:center}
+.card img{aspect-ratio:16/10;object-position:center}
+.agrid.solo{grid-template-columns:minmax(0,1fr)}
+.thumbfig{margin:0 0 26px;border-radius:18px;overflow:hidden;border:1px solid var(--line)}.thumbfig img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.phero .monitor img{object-position:center 30%}
+#edbar{position:fixed;inset-inline-start:18px;bottom:18px;z-index:30}
+dialog#editor{width:min(820px,94vw);max-height:92vh;border:1px solid var(--line2);border-radius:22px;background:#070C1B;color:var(--ink);padding:0;box-shadow:0 40px 120px -20px rgba(31,77,255,.6)}
+dialog#editor::backdrop{background:rgba(3,5,12,.75);backdrop-filter:blur(4px)}
+#edform{display:grid;gap:14px;padding:22px 24px 24px}
+#edform h2{margin:0;font-size:22px}
+#edform label{display:grid;gap:6px;font-size:14px;color:var(--mute)}
+#edform input,#edform select,#edform textarea{font:16px/1.7 var(--h);color:var(--ink);background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:12px;padding:10px 12px;min-height:44px;width:100%}
+#edform textarea{font-family:var(--b);resize:vertical}
+#edform .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+#edform .acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#edmsg{color:var(--ice);font-size:14px;min-height:20px}
+.btn.ghost{background:transparent}
+.vtop{position:relative;margin:26px 0 6px;border-radius:26px;overflow:hidden;border:1px solid var(--line2);padding:clamp(18px,3vw,36px);display:grid;place-items:center;isolation:isolate}
+.vtop::before{content:"";position:absolute;inset:-30px;background:var(--bgimg) center/cover;filter:blur(26px) brightness(.45);z-index:-1}
+.vtop figure{margin:0;width:min(380px,100%)}.vtop figcaption,.vinline figcaption{font-size:13px;color:var(--mute);margin-top:10px;line-height:1.7;font-family:var(--h)}
+.vinline{float:left;width:300px;margin:6px 28px 18px 0}
+@media(max-width:700px){.vinline{float:none;width:min(320px,100%);margin:10px auto 22px}}
+.src,.tags{clear:both}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:36px 0 46px;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;gap:28px;justify-content:space-between;flex-wrap:wrap;align-items:flex-start}
+footer nav{display:flex;gap:16px;flex-wrap:wrap}footer nav a:hover{color:var(--ink)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:980px){.split,.agrid{grid-template-columns:minmax(0,1fr)}.vbox{position:static;max-width:360px;margin:0 auto}.agrid .vbox{order:-1}}
+@media(max-width:760px){.feat .card:first-child{flex-direction:column}.feat .card:first-child img{width:100%;aspect-ratio:16/10;min-height:0}.hgrid{grid-template-columns:minmax(0,1fr)}.phero{grid-template-columns:minmax(0,1fr)}.phero .monitor{max-width:260px}nav.main{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px}nav.main a{flex:none}.top .wrap span:last-child{display:none}html{scroll-padding-top:170px}.body{font-size:18px}.body .lead{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.tk div{animation:none}.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1D52"/><stop offset=".55" stop-color="#0B1846"/><stop offset="1" stop-color="#1C47C9"/></linearGradient>
+  <linearGradient id="te" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CC2FF" stop-opacity=".55"/><stop offset=".5" stop-color="#5B8DFF" stop-opacity=".25"/><stop offset="1" stop-color="#8FB8FF" stop-opacity=".9"/></linearGradient>
+  <radialGradient id="ts" cx=".5" cy="1.05" r=".75"><stop offset="0" stop-color="#4F86FF" stop-opacity=".75"/><stop offset="1" stop-color="#4F86FF" stop-opacity="0"/></radialGradient>
+  <symbol id="glyph" viewBox="0 0 120 120"><path d="M42 34H55L45 86H32Z"/><path d="M74 34H87L80 70H67Z"/><path d="M47 54H78L76 64H39Z"/><path d="M64 88L72 74L80 88Z"/></symbol>
+  <symbol id="mark" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="28" fill="url(#tg)"/><rect x="10" y="10" width="100" height="100" rx="28" fill="url(#ts)"/><rect x="10.75" y="10.75" width="98.5" height="98.5" rx="27.3" fill="none" stroke="url(#te)" stroke-width="1.5"/><use href="#glyph" fill="#A2CCFF"/></symbol>
+  <symbol id="mono" viewBox="0 0 120 120"><rect x="11" y="11" width="98" height="98" rx="27" fill="none" stroke="currentColor" stroke-width="3"/><use href="#glyph" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+<div class="top"><div class="wrap"><span id="today">الاثنين 23 تشرين الثاني 2026 · عمان</span><span>موقع إخباري مستقل يُعنى بالتقنية والذكاء الاصطناعي</span></div></div>
+<header class="mast"><div class="wrap">
+ <a class="brand" href="#" aria-label="ميديا اتش، الصفحة الرئيسية"><svg style="filter:drop-shadow(0 0 10px rgba(61,123,255,.55))"><use href="#mark"/></svg><span><b>ميديا اتش</b><small>MEDIA H</small></span></a>
+ <nav class="main" id="nav" aria-label="الأقسام">
+  <a href="#" data-r="">الرئيسية</a><a href="#cat-ai" data-r="cat-ai">ذكاء اصطناعي</a><a href="#cat-companies" data-r="cat-companies">شركات</a><a href="#cat-tools" data-r="cat-tools">أدوات وبرمجيات</a><a href="#cat-education" data-r="cat-education">تعليم</a><a href="#publisher" data-r="publisher">الناشر</a><a href="#identity" data-r="identity">الهوية</a>
+ </nav>
+</div></header>
+<div class="ticker"><div class="wrap"><span class="pill solid"><i></i>عاجل</span><div class="tk" id="tk"></div></div></div>
+<main id="app"></main>
+
+<footer><div class="wrap">
+ <div><a class="brand" href="#"><svg><use href="#mark"/></svg><span><b>ميديا اتش</b><small>MEDIA H</small></span></a><p style="max-width:42ch;font-family:var(--b);line-height:1.9">موقع إخباري تقني مستقل يصدر من عمان، يقدّم أخبار التقنية والذكاء الاصطناعي بلغة صحفية دقيقة ومصادر موثّقة.</p></div>
+ <nav aria-label="روابط"><a href="#cat-ai">ذكاء اصطناعي</a><a href="#cat-companies">شركات</a><a href="#cat-tools">أدوات وبرمجيات</a><a href="#cat-education">تعليم</a><a href="#publisher">عن الناشر</a><a href="#identity">الهوية البصرية</a></nav>
+ <p style="width:100%;margin:0">© 2026 ميديا اتش. الناشر ورئيس التحرير: أنس نهاد أبو سنينة.</p>
+</div></footer>
+<script>
+{
+const ARTICLES = [
+{
+slug:"nvidia-huang", vlayout:"top", thumb:"v/p-nvidia.jpg", cat:"companies", type:"قصة إخبارية", time:"10:15",
+title:"من السترة الجلدية إلى الاستقالة.. قصة الأسابيع التي أخرجت جنسن هوانغ من إنفيديا بعد 33 عاماً",
+short:"قصة الأسابيع الأخيرة لجنسن هوانغ في إنفيديا",
+dek:"صورة في تايبيه، وتقرير صحفي عن مسؤولة يُشتبه بعملها لصالح الاستخبارات الصينية، ورسالة اعتذار، وتحقيق فيدرالي ودعوى من المساهمين.. محطات انتهت برحيل مؤسس الشركة الأعلى قيمة في العالم.",
+img:"v/nvidia.jpg", video:"v/nvidia.mp4", read:6,
+body:`
+<p class="lead">لسنوات طويلة، ارتبطت صورة إنفيديا بسترة جلدية سوداء لا يكاد يخلعها مؤسسها جنسن هوانغ، يعتلي بها منصات المؤتمرات ليكشف عن رقائق تحرّك طفرة الذكاء الاصطناعي حول العالم. غير أن الرجل نفسه عاد إلى صدارة الصحف خلال الأسابيع الماضية من باب مختلف تماماً؛ صورة التُقطت في العاصمة التايوانية تايبيه، يقف فيها مبتسماً إلى جانب امرأة تقول تقارير صحفية إن الاستخبارات الأمريكية تشتبه في عملها لصالح بكين.</p>
+<p>وانتهت القصة في 12 تشرين الثاني/نوفمبر الجاري، حين أعلن مجلس إدارة إنفيديا استقالة هوانغ من منصبَي الرئيس والرئيس التنفيذي ومن عضوية المجلس بأثر فوري، منهياً مسيرة امتدت 33 عاماً على رأس الشركة التي أسسها عام 1993، وذلك بعد أيام من اعترافه بعلاقة خارج إطار الزواج مع أليس هوانغ، المسؤولة السابقة في شركة «ميغاسبيد» السنغافورية.</p>
+<p>وعيّن المجلس، في بيان أودعته الشركة لدى هيئة الأوراق المالية الأمريكية، المديرة المالية كوليت كريس رئيسة تنفيذية مؤقتة، وهارفي جونز أول رئيس لمجلس الإدارة في تاريخ الشركة، فيما بدأ البحث عن رئيس تنفيذي دائم من داخل الشركة وخارجها.</p>
+<h2>صورة في تايبيه</h2>
+<p>تعود بدايات القصة إلى تشرين الأول/أكتوبر 2025، حين كشفت صحيفة نيويورك تايمز أن وزارة التجارة الأمريكية تحقق فيما إذا كانت «ميغاسبيد»، وهي شركة سنغافورية لمراكز البيانات وأحد عملاء إنفيديا، قد حوّلت رقائق محظوراً تصديرها إلى الصين. ونشرت الصحيفة حينها صورة تجمع جنسن هوانغ بأليس هوانغ في تايبيه في حزيران/يونيو 2024.</p>
+<p>وأليس هوانغ، المعروفة أيضاً باسم هوانغ لي، مواطنة صينية لا تربطها صلة قرابة بجنسن هوانغ رغم تشابه الاسمين. وتُظهر سجلات تجارية أوردتها الصحيفة أن «ميغاسبيد» اشترت معالجات من إنفيديا بأكثر من 4.8 مليار دولار خلال عامين، فيما تقول الشركة إن هوانغ غادرتها عام 2025.</p>
+<h2>تقرير يفجّر الأزمة</h2>
+<p>وفي 29 تشرين الأول/أكتوبر 2026، نقلت نيويورك تايمز عن مصادر لم تسمّها أن مسؤولين أمريكيين يعتقدون أن أليس هوانغ عميلة للاستخبارات الصينية، وأنها حافظت على علاقة وثيقة بجنسن هوانغ لنقل معلومات إلى بكين. وأفادت صحيفة فايننشال تايمز بأن مذكرة استخباراتية تداولها مسؤولون كبار في الإدارة الأمريكية وصفت العلاقة بأنها عاطفية.</p>
+<p>وشككت إنفيديا في الاتهامات المتعلقة بعميلها «ميغاسبيد»، ولم يثبت أي منها رسمياً حتى الآن.</p>
+<h2>رسالة الأحد</h2>
+<p>ويوم الأحد 8 تشرين الثاني/نوفمبر، كسر هوانغ صمته برسالة إلى موظفي الشركة نشرتها إنفيديا على موقعها، أقرّ فيها بأنه «لم يكن مخلصاً» لزوجته، وقال إنه لا عذر لما فعل، طالباً احترام خصوصية عائلته التي قال إنها لا تتحمل أي مسؤولية عن خياراته. وفي اليوم ذاته، فتح مجلس الإدارة تحقيقاً مستقلاً لمعرفة ما إذا كان رئيس الشركة قد تعرّض لمحاولة استهداف من جهاز استخبارات أجنبي.</p>
+<p>وجاء ردّ الأسواق سريعاً؛ إذ هبط السهم يوم الاثنين بنسبة وصلت إلى 8.8%، ماحياً في ذروة التراجع نحو 400 مليار دولار من القيمة السوقية، قبل أن يغلق منخفضاً بنحو 4.3%، ثم خسر 5.5% إضافية في اليوم التالي. وبحسب تقديرات مجلة فوربس، فقد هوانغ نحو 7.4 مليار دولار من ثروته في اليوم الأول، وخرج لفترة وجيزة من قائمة أغنى عشرة أشخاص في العالم.</p>
+<h2>من البيت الأبيض إلى المحكمة</h2>
+<p>وقال الرئيس الأمريكي دونالد ترامب للصحفيين إن مكتب التحقيقات الفيدرالي (إف بي آي) يتابع القضية، مضيفاً أنه تحدث إلى هوانغ ويصدّق أنه لم يكن يعلم بأن المرأة المعنية جاسوسة.</p>
+<p>وفي اليوم نفسه، رفع مساهمون دعوى جماعية مقترحة أمام محكمة فيدرالية في سان خوسيه بولاية كاليفورنيا، اتهموا فيها الشركة ورئيسها بتضليل المستثمرين عبر إخفاء العلاقة، وتشمل الدعوى من اشتروا أسهم الشركة بين 9 تشرين الأول/أكتوبر و8 تشرين الثاني/نوفمبر، ولم يصدر فيها أي حكم حتى الآن.</p>
+<h2>القشة الأخيرة</h2>
+<p>وتسارعت الأحداث يوم الأربعاء 11 تشرين الثاني/نوفمبر، مع تقارير تحدثت عن علاقة ثانية جمعت هوانغ بمسؤولة تنفيذية في الشركة كانت تتبع له إدارياً، ليجتمع مجلس الإدارة في اليوم ذاته لبحث إقالته، قبل أن يُعلن رحيله يوم الخميس، ويتراجع السهم بأكثر من 10% في تداولات ما قبل افتتاح السوق.</p>
+<h2>ثروة على المحك</h2>
+<p>ولا تتوقف تبعات القصة عند الشركة؛ فهوانغ متزوج من لوري هوانغ منذ عام 1985، بعدما تعارفا زميلَين في جامعة ولاية أوريغون، ويقيمان في كاليفورنيا التي تعتمد نظام «الملكية المشتركة» للأصول المكتسبة خلال الزواج. ووفق هذا النظام، قد تحصل الزوجة نظرياً على نصف ثروة قدّرتها فوربس بنحو 155 مليار دولار، أي ما يقارب 77 مليار دولار، ما لم يكن هناك اتفاق مسبق بين الزوجين. ولم يُعلن عن أي إجراءات طلاق حتى الآن.</p>
+<p>ويحتفظ هوانغ بحصة تقارب 3.6% من أسهم الشركة تجعله رابع أكبر مستثمر فيها. وبين تحقيقات لم تُحسم بعد ومقعد قيادة شاغر، تدخل الشركة التي صنعت محرّك طفرة الذكاء الاصطناعي أول مرحلة في تاريخها من دون مؤسسها.</p>
+`,
+sources:[
+["بيان إنفيديا حول انتقال منصب الرئيس التنفيذي (SEC)","https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"],
+["رسالة جنسن هوانغ إلى موظفي إنفيديا","https://nvidianews.nvidia.com/news/a-message-to-our-company"],
+["الجزيرة: تراجع أسهم إنفيديا مع التحقيق مع رئيسها التنفيذي","https://www.aljazeera.com/economy/2026/11/9/nvidia-shares-slump-amid-investigation-into-ceo-jensen-huang"],
+["Boston Globe: دعوى المساهمين ضد إنفيديا","https://www.bostonglobe.com/2026/11/10/business/nvidia-jensen-huang-lawsuit/"],
+["Korea Times: ترامب يؤكد تحقيق إف بي آي","https://www.koreatimes.co.kr/world/20261111/alleged-spy-plot-targeting-ceo-jensen-huang-raises-questions-about-nvidias-future"],
+["Fortune: ما يقوله قانون كاليفورنيا عن الطلاق","https://fortune.com/2026/11/14/jensen-huang-divorce-lori-huang-nvidia-fortune-community-property"]
+],
+tags:["إنفيديا","جنسن هوانغ","الصين","أسواق"]
+},
+{
+slug:"claude-meetings", vlayout:"side", thumb:"v/p-meetings.jpg", cat:"ai", type:"خبر", time:"09:40",
+title:"أنثروبيك تطلق «Claude Meetings».. مساعد ذكي يحضر اجتماعات الفيديو ويُنجز المهام أثناء النقاش",
+short:"«Claude Meetings».. كلود يحضر اجتماعاتك ويعمل أثناء النقاش",
+dek:"الميزة متاحة بنسخة تجريبية لمشتركي خطط Team وEnterprise، وتعمل حالياً عبر Google Meet فقط، على أن تصل إلى منصات أخرى لاحقاً.",
+img:"v/meetings.jpg", video:"v/meetings.mp4", read:3,
+body:`
+<p class="lead"><b>عمان – ميديا اتش</b> – أطلقت شركة أنثروبيك الأمريكية، يوم الثلاثاء 10 تشرين الثاني/نوفمبر الجاري، ميزة «Claude Meetings» التي تتيح لمساعدها الذكي كلود الانضمام إلى اجتماعات الفيديو عبر منصة Google Meet مشاركاً مرئياً، يدوّن الملاحظات ويجيب عن الأسئلة ويُنجز المهام في أثناء النقاش، وذلك في نسخة تجريبية لمشتركي خطط Team وEnterprise، سعياً إلى توسيع حضورها في بيئات العمل المكتبي.</p>
+<p>وكشفت الشركة عن الميزة إلى جانب أداتَي Claude Whiteboards للتخطيط البصري التشاركي وClaude Sheets لجداول البيانات، فيما بدأ طرحها التدريجي للمستخدمين في 12 من الشهر ذاته، على أن تصل إلى منصات اجتماعات أخرى لاحقاً.</p>
+<p>وعند انضمامه إلى الاجتماع، يعرّف كلود بنفسه وينشر تنبيهاً في دردشة الاجتماع يتضمن رابطاً إلى صفحة خاصة بالاجتماع على claude.ai، تعرض النص المكتوب للحوار مباشرة والملاحظات وكل ما ينشئه من مستندات.</p>
+<h2>ماذا يفعل كلود داخل الاجتماع؟</h2>
+<p>ويستطيع المساعد الرد على الأسئلة نصياً في دردشة الاجتماع، واستدعاء معلومات من التطبيقات التي يربطها المستخدم بحسابه، إضافة إلى كتابة المستندات وإعداد الخطط والجداول الزمنية وبناء اللوحات البيضاء بالتزامن مع حديث المشاركين.</p>
+<p>وبعد انتهاء الاجتماع، تُحفظ الملاحظات وقائمة المهام وكل ما أنشأه كلود في صفحة الاجتماع، ويمكن لأعضاء المؤسسة المدعوين الاطلاع عليها وتعديلها. وتقول الشركة إن السجل المحفوظ يشمل النص المكتوب والملخص ووصفاً لما عُرض على الشاشة، دون الاحتفاظ بالتسجيل الصوتي.</p>
+<h2>شروط الإتاحة</h2>
+<p>وفي خطط Team تكون الميزة مفعّلة افتراضياً ويحق لمسؤول الحساب إيقافها، بينما يتولى المسؤول تفعيلها في خطط Enterprise لكامل المؤسسة أو لجزء منها. ولا تتوفر الميزة خلال المرحلة التجريبية للمؤسسات التي تعتمد إعدادات عدم الاحتفاظ بالبيانات أو المتوافقة مع معايير HIPAA أو التي تدير مفاتيح التشفير الخاصة بها.</p>
+<p>وأوضحت أنثروبيك أن المستندات واللوحات التي ينشئها كلود خلال الاجتماعات مجانية حتى 10 شباط/فبراير 2027، دون أن تعلن عن تسعيرها بعد ذلك التاريخ.</p>
+<p>وتشير صفحات المساعدة الرسمية إلى أن دعم منصات اجتماعات أخرى «قادم قريباً» دون تحديد موعد، في حين نقل موقع Computerworld عن متحدث باسم الشركة أن الميزة ستشمل Microsoft Teams.</p>
+<p>وقال مسؤول منتجات العمل المعرفي في الشركة نيكولاس لين لموقع «أكسيوس» إن أنثروبيك اختبرت الميزة داخلياً نحو شهرين، وإن كلود بات يحضر معظم اجتماعات موظفيها.</p>`,
+sources:[
+["TechCrunch: أنثروبيك تطلق Claude Meetings","https://techcrunch.com/?p=3186876"],
+["BetaNews: كلود في مكالمات Google Meet","https://betanews.com/article/claude-meetings-whiteboards-sheets-anthropic/"],
+["Computerworld: أنثروبيك تستهدف التعاون في بيئة العمل","https://www.computerworld.com/?p=4247466"],
+["Just Being Resourceful: تفاصيل الإتاحة ومصادر رسمية","https://justbeingresourceful.com/2026/11/13/anthropic-adds-claude-meetings-to-google-meet/"]
+],
+tags:["أنثروبيك","كلود","اجتماعات","ذكاء اصطناعي"]
+},
+{
+slug:"artcraft-adobe", vlayout:"inline", thumb:"v/p-adobe.jpg", cat:"tools", type:"تقرير", time:"09:05",
+title:"مطوّر يعيد بناء برامج أدوبي بالذكاء الاصطناعي ويطرحها مجاناً ومفتوحة المصدر.. فهل تصلح بديلاً؟",
+short:"بدائل مجانية لفوتوشوب وبريمير وأفتر إفكتس بُنيت بالذكاء الاصطناعي",
+dek:"مشروع ArtCraft بدأ بسبعة تطبيقات تحاكي حزمة Creative Cloud وتعمل على ويندوز وماك ولينكس، لكنه ما يزال في مراحل تطوير مبكرة.",
+img:"v/adobe.jpg", video:"v/adobe.mp4", read:4,
+body:`
+<p class="lead"><b>عمان – ميديا اتش</b> – طرح المطوّر براندون توماس، مطلع تشرين الأول/أكتوبر الماضي، عبر مشروعه ArtCraft على منصة GitHub، سبعة تطبيقات مجانية مفتوحة المصدر تحاكي أشهر برامج شركة أدوبي، من بينها فوتوشوب وبريمير برو وأفتر إفكتس، بعدما بناها بلغة البرمجة Rust بمساعدة نموذج Claude Opus 5.5 من أنثروبيك، رفضاً لنموذج الاشتراكات ورسوم الإلغاء التي تفرضها أدوبي.</p>
+<p>ويقابل كلٌّ من التطبيقات السبعة برنامجاً من حزمة Creative Cloud: PhotoCraft بديلاً لفوتوشوب، وVectorCraft لإليستريتور، وFilmCraft لبريمير برو، وLightCraft للايت روم، وEffectCraft لأفتر إفكتس، وDesignCraft لإن ديزاين، وPdfCraft لأكروبات.</p>
+<p>وتعتمد التطبيقات واجهات وقوائم واختصارات قريبة عمداً من برامج أدوبي، لتسهيل انتقال المستخدمين المعتادين عليها، وتُوزَّع برخصتي MIT وApache دون جمع بيانات استخدام، بحسب المطوّر.</p>
+<h2>من سبعة برامج إلى عائلة أكبر</h2>
+<p>وتوسع المشروع لاحقاً ليشمل بدائل لبرامج أخرى، مثل WordCraft لمعالجة النصوص وGridCraft للجداول وDeckCraft للعروض التقديمية، إضافة إلى SoundCraft لتحرير الصوت وCADCraft للتصميم الهندسي، وتُثبَّت جميعها من مشغّل واحد عبر الموقع الرسمي للمشروع.</p>
+<p>ويقول توماس إن ما دفعه إلى استهداف أدوبي هو تكرار اصطدامه برسوم إلغاء الاشتراك، معتبراً أن أدوات البرمجة بالذكاء الاصطناعي ستمكّن فرقاً صغيرة من بناء بدائل مفتوحة المصدر لبرامج تجارية ضخمة.</p>
+<h2>هل هي جاهزة للعمل الاحترافي؟</h2>
+<p>غير أن التطبيقات ما تزال في مراحل تطوير مبكرة؛ إذ يصنّف المشروع PhotoCraft نسخة «ألفا» أولية، فيما تُعدّ FilmCraft وLightCraft قيد التطوير. وقدّرت تقييمات المشروع الذاتية في 10 تشرين الأول/أكتوبر جاهزية PhotoCraft للعمل الفعلي بنحو 45%، وFilmCraft بنحو 56%.</p>
+<p>ويدعم PhotoCraft ملفات فوتوشوب متعددة الطبقات، لكن الخطوط المعقدة والمؤثرات والخصائص الخاصة ببرامج أدوبي قد تعمل بشكل مختلف، كما لا يستطيع FilmCraft حتى الآن فتح مشاريع بريمير برو مباشرة.</p>
+<p>وينصح مراجعون تقنيون بالتعامل مع هذه التطبيقات بوصفها أدوات واعدة للتجربة إلى جانب البرامج الحالية، لا بديلاً جاهزاً للعمل اليومي، فيما يبقى موقف أدوبي من المشروع غير معروف.</p>`,
+sources:[
+["الموقع الرسمي لتطبيقات ArtCraft","https://getartcraft.com/apps"],
+["CineD: سبعة تطبيقات مجانية تحاكي Creative Cloud","https://www.cined.com/?p=443209"],
+["Notebookcheck: مطوّر يعيد إنشاء حزمة أدوبي","https://www.notebookcheck.net/1419230.html"],
+["TweakTown: تطبيقات ما تزال في مرحلة ألفا","https://www.tweaktown.com/news/113989/developer-says-software-is-over-after-using-ai-to-recreate-adobes-entire-creative-cloud-suite-for-free/index.html"],
+["AIIDE List: مدى جاهزية PhotoCraft وFilmCraft","https://aiidelist.com/blog/artcraft-photocraft-filmcraft-free-adobe-alternatives"]
+],
+tags:["أدوبي","مصادر مفتوحة","مونتاج","تصميم"]
+},
+{
+slug:"career-ops", vlayout:"side", thumb:"v/p-careerops.jpg", cat:"tools", type:"خبر", time:"08:30",
+title:"Career-Ops.. أداة مفتوحة المصدر تحوّل Claude Code إلى مركز متكامل للبحث عن عمل",
+short:"أداة مجانية تجعل الذكاء الاصطناعي يبحث لك عن وظيفة ويعدّل سيرتك",
+dek:"الأداة تقيّم كل وظيفة من 1 إلى 5 وتكيّف السيرة الذاتية لكل طلب وتتابع التقديمات من مكان واحد، وتجاوزت 69 ألف نجمة على GitHub.",
+img:"v/careerops.jpg", video:"v/careerops.mp4", read:3,
+body:`
+<p class="lead"><b>عمان – ميديا اتش</b> – أتاح المطوّر سانتياغو فرنانديز دي فالديراما، في نيسان/أبريل الماضي، أداة Career-Ops مجاناً على منصة GitHub برخصة مفتوحة المصدر، لتحويل مساعدات البرمجة بالذكاء الاصطناعي، وفي مقدمتها Claude Code، إلى منظومة تبحث عن الوظائف وتقيّمها وتكيّف السيرة الذاتية لكل وظيفة، بعدما طوّرها خلال رحلة بحثه الشخصية عن عمل، لتتجاوز الأداة منذ ذلك الحين 69 ألف نجمة على المنصة.</p>
+<p>وقيّم المطوّر، المعروف على الإنترنت باسم santifer، عبر الأداة أكثر من 740 إعلان وظيفة، وأعدّ أكثر من 100 سيرة ذاتية مخصصة، قبل أن يحصل على الوظيفة التي يريدها، ثم أتاحها للعموم برخصة MIT.</p>
+<h2>كيف تعمل؟</h2>
+<p>ويبدأ المستخدم بتزويد الأداة بسيرته الذاتية وتحديد الوظائف التي يستهدفها، لتتولى بعدها فحص مواقع التوظيف وصفحات الشركات، ومنها Greenhouse وAshby وLever وWellfound.</p>
+<p>وتمنح الأداة كل وظيفة تقييماً من 1 إلى 5 بناءً على مقارنة خبرات المستخدم ومهاراته بمتطلبات الإعلان عبر خمسة أبعاد، ضمن تقرير منظم يتضمن أيضاً فحصاً لمدى جدية الإعلان، ثم تُنشئ نسخة من السيرة الذاتية بصيغة PDF متوافقة مع أنظمة فرز المتقدمين لكل وظيفة.</p>
+<p>وتعمل الأداة محلياً على جهاز المستخدم، وتدعم إلى جانب Claude Code أدوات أخرى مثل Codex وOpenCode وGitHub Copilot، فيما توصي صفحة المشروع بمراجعة أي طلب قبل إرساله.</p>
+<p>وحظي المشروع بتغطية من مجلة «وايرد» وموقع «بزنس إنسايدر»، في ظل اعتماد متزايد للشركات على الذكاء الاصطناعي في فرز المتقدمين للوظائف.</p>`,
+sources:[
+["صفحة المشروع على GitHub","https://github.com/santifer/career-ops"],
+["الموقع الرسمي لـ Career-Ops","https://career-ops.org"],
+["Digit: استخدم Claude Code للتقديم على 700 وظيفة","https://www.digit.in/features/general/he-used-claude-code-to-apply-to-over-700-jobs-and-got-hired-heres-how.html"],
+["Product Hunt: Career-Ops","https://www.producthunt.com/products/santifer-io"]
+],
+tags:["وظائف","Claude Code","مصادر مفتوحة"]
+},
+{
+slug:"replica-skill", vlayout:"inline", thumb:"v/t-replica.jpg", cat:"ai", type:"خبر", time:"08:00",
+title:"«Replica».. 11 مهارة مجانية لكلود تحلّل أي تطبيق وتعيد بناء ميزاته",
+short:"11 مهارة مجانية تجعل كلود يحلّل أي تطبيق ويعيد بناءه",
+dek:"الحزمة تحلّل التطبيق وتخطط له وتبنيه وتختبره، ثم تقترح هوية جديدة وصفحة إطلاق، لكنها تنسخ الفكرة والميزات لا الشيفرة أو الشعار أو المحتوى.",
+img:"v/replica.jpg", video:"v/replica.mp4", read:3,
+body:`
+<p class="lead"><b>عمان – ميديا اتش</b> – أتاح المطوّر جيك شينكاريول، عبر منصة GitHub، حزمة «Replica Skill» المجانية مفتوحة المصدر، التي تضم 11 مهارة لنموذج Claude تحلّل أي تطبيق قائم وتعيد بناء ميزاته وتختبره، ثم تطلقه باسم وهوية جديدين، دون الحاجة إلى تسجيل أو مفتاح API، بهدف اختصار مراحل تطوير التطبيقات من الفكرة إلى النشر.</p>
+<p>وتعمل المهارات بالتتابع وتتشارك مجلداً واحداً داخل المشروع، كما يمكن تشغيل أي منها منفردة. وتُوزَّع الحزمة برخصة MIT، وتجاوز عدد نجومها على GitHub 8500 نجمة مطلع تشرين الأول/أكتوبر الماضي.</p>
+<h2>من التحليل إلى النشر</h2>
+<p>وتبدأ مهارة التحليل بتفكيك التطبيق المستهدف إلى شاشاته وخطوات استخدامه ومكوناته وبنية بياناته، اعتماداً على صفحاته العامة ولقطات الشاشة وصفحته في متاجر التطبيقات، ثم تخطط مهارة أخرى للتقنيات المستخدمة وقاعدة البيانات والخادم.</p>
+<p>وتتولى مهارات لاحقة التصميم والبناء وتطوير الواجهة الخلفية، ثم اختبار كل زر بحثاً عن الأخطاء ومقارنة النسخة الجديدة بالأصل.</p>
+<p>ومن أبرز ما تقدمه الحزمة مهارة تقرأ تقييمات المستخدمين للتطبيق الأصلي لتحديد ما لا يعجبهم فيه ومعالجته في النسخة الجديدة، فيما تقترح مهارات أخرى اسماً وهوية بصرية وصفحة إطلاق وتسعيراً، وتنتهي بنشر التطبيق.</p>
+<h2>حدود النسخ</h2>
+<p>ويؤكد المطوّر أن الحزمة تعيد بناء الفكرة والميزات وطريقة الاستخدام، ولا تنسخ الشيفرة البرمجية أو الشعار أو المحتوى الخاص بالتطبيق الأصلي، ما يترك على المستخدم مسؤولية احترام حقوق الملكية الفكرية والعلامات التجارية.</p>
+<p>ويمكن تثبيت الحزمة بلصق رابط المستودع في محادثة مع Claude وطلب تثبيتها، أو إضافتها إضافةً برمجية داخل Claude Code، أو نسخ مجلداتها يدوياً إلى مجلد المهارات.</p>`,
+sources:[
+["صفحة Replica Skill على EveryDev","https://www.everydev.ai/tools/replica-skill"],
+["ExplainX: دليل مهارات Replica الإحدى عشرة","https://explainx.ai/blog/replica-skill-eleven-claude-skills-clone-any-app-recon-entrepreneur-guide-2026"],
+["SkillsLLM: طرق التثبيت والمهارات","https://skillsllm.com/skill/replica-skill"],
+["مستودع المشروع على GitHub","https://github.com/Jakeschincariol/replica-skill"]
+],
+tags:["كلود","مهارات","تطوير التطبيقات"]
+},
+{
+slug:"gemini-students", vlayout:"top", thumb:"v/p-gemini.jpg", cat:"education", type:"خبر", time:"07:30",
+title:"غوغل تمنح طلبة الجامعات العرب اشتراك Google AI Plus مجاناً لمدة عام",
+short:"اشتراك Gemini مجاني لطلبة الجامعات لمدة 12 شهراً.. وهكذا تحصل عليه",
+dek:"العرض يشمل توليد الفيديو بنموذج Omni والصور بنموذج Nano Banana ومساحة تخزين 400 غيغابايت، ويستمر التسجيل حتى 31 كانون الأول/ديسمبر.",
+img:"v/gemini.jpg", video:"v/gemini.mp4", read:3,
+body:`
+<p class="lead"><b>عمان – ميديا اتش</b> – أتاحت شركة غوغل، مطلع أيلول/سبتمبر الماضي، لطلبة الجامعات في الدول العربية التي تتوفر فيها خدماتها اشتراكاً مجانياً لمدة 12 شهراً في باقة Google AI Plus، ضمن حملتها العالمية للعودة إلى الدراسة، يمنحهم الوصول إلى نموذج Omni لتوليد مقاطع الفيديو ونموذج Nano Banana لتوليد الصور ومساحة تخزين سحابية بسعة 400 غيغابايت، على أن يسجّلوا عبر صفحة العرض قبل 31 كانون الأول/ديسمبر المقبل.</p>
+<p>واشترطت الشركة أن يكون المتقدم طالباً جامعياً على مقاعد الدراسة، وألا يقل عمره عن 18 عاماً.</p>
+<h2>ماذا يتضمن الاشتراك؟</h2>
+<p>ويمنح الاشتراك الطالب الوصول إلى تطبيق Gemini المدعوم بنموذج 3.1 Pro وميزة البحث المعمّق، وتوليد مقاطع فيديو تصل مدتها إلى 10 ثوانٍ بنموذج Omni، وإنشاء الصور وتعديلها بنموذج Nano Banana، إضافة إلى ضعف حدود الاستخدام المتاحة في النسخة المجانية.</p>
+<p>ويشمل العرض كذلك أداة Gemini Notebook، المعروفة سابقاً باسم NotebookLM، لتلخيص الملاحظات والكتب وإنتاج ملخصات صوتية وتفاعلية.</p>
+<h2>خطوات التسجيل</h2>
+<p>ويتم التسجيل عبر صفحة العرض الرسمية بإدخال الاسم وتاريخ الميلاد والدولة واسم الجامعة، ثم رفع صورة البطاقة الجامعية أو وثيقة تثبت التسجيل في الجامعة، لتصل بعد التحقق رسالة تأكيد إلى البريد الإلكتروني.</p>
+<p>وتطلب غوغل عادة إضافة وسيلة دفع عند التسجيل، ويتحول الاشتراك تلقائياً إلى اشتراك مدفوع بعد انتهاء الأشهر الاثني عشر ما لم يُلغَ، ما يستدعي الانتباه إلى موعد التجديد.</p>
+<p>ويأتي العرض ضمن حملة عالمية للعودة إلى الدراسة، يحصل بموجبها الطلبة في الولايات المتحدة على باقة Google AI Pro الأعلى مع مساحة 5 تيرابايت، فيما يحصل الطلبة في أكثر من 140 دولة أخرى على باقة AI Plus، مع خصومات تصل إلى 75% على باقة AI Pro.</p>`,
+sources:[
+["مدونة غوغل (الشرق الأوسط وشمال أفريقيا): عرض Gemini لطلبة الجامعات","https://blog.google/intl/en-mena/company-news/outreach-initiatives/gemini-university-student-offer-arab-world/"],
+["صفحة التسجيل في العرض","https://goo.gle/students2026-mena"],
+["مدونة غوغل: عام من Gemini مجاناً للطلبة","https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/"],
+["Tom's Guide: شروط العرض والتجديد التلقائي","https://www.tomsguide.com/ai/google-gemini/google-is-giving-students-a-free-year-of-gemini-pro-plus-new-ai-study-features"]
+],
+tags:["غوغل","Gemini","طلبة","تعليم"]
+}
+];
+
+const SITE="https://anasnihad.github.io/media-h/";
+const CATS={ai:"ذكاء اصطناعي",companies:"شركات",tools:"أدوات وبرمجيات",education:"تعليم"};
+const TYPES=["خبر","تقرير","مقال"];
+const AUTHOR="أنس نهاد أبو سنينة";
+const BASE=ARTICLES.map(a=>({...a}));
+let LIST=ARTICLES.map(a=>({...a}));
+let DB=null,ASSETS=null,OWNER=false,DOCS={};
+const app=document.getElementById("app");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl=u=>/^https:\/\//.test(u||"")?u:"";
+const imgOf=a=>a.thumbId?"/_blob/"+a.thumbId:(a.thumb||"v/t-generic.jpg");
+const vidOf=a=>a.videoId?"/_blob/"+a.videoId:(a.video||"");
+const ord=a=>LIST.indexOf(a);
+/* text <-> html for edited articles: paragraphs split by blank lines, "## " = subhead */
+function textToHtml(t){
+ const parts=String(t||"").split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+ return parts.map((p,i)=>{
+  if(p.startsWith("## "))return `<h2>${esc(p.slice(3))}</h2>`;
+  let h=esc(p).replace(/\n/g,"<br>");
+  if(i===0){h=h.replace(/^(عمان|عمان)\s*–\s*ميديا اتش/,m=>`<b>${m}</b>`);return `<p class="lead">${h}</p>`}
+  return `<p>${h}</p>`;
+ }).join("");
+}
+function htmlToText(h){
+ const d=new DOMParser().parseFromString(`<div>${h}</div>`,"text/html");
+ return [...d.body.firstChild.children].map(e=>e.tagName==="H2"?"## "+e.textContent.trim():e.textContent.trim()).filter(Boolean).join("\n\n");
+}
+const dateOf=a=>a.date||"23 تشرين الثاني 2026";
+const by=a=>`<div class="by"><img src="anas.jpg" alt=""><span>بقلم <b>${AUTHOR}</b></span><span>·</span><span>${esc(dateOf(a))} – ${esc(a.time)}</span><span>·</span><span>قراءة ${esc(a.read||3)} دقائق</span></div>`;
+const card=a=>`<a class="card" href="#${a.slug}"><img src="${esc(imgOf(a))}" alt="" loading="lazy"><div class="in"><span class="tag">${esc(CATS[a.cat])} · ${esc(a.type)}</span><h3>${esc(a.short)}</h3><p>${esc(a.dek)}</p><div class="meta"><span>${AUTHOR}</span><span>·</span><span>${esc(a.time)}</span></div></div></a>`;
+function ticker(){document.getElementById("tk").innerHTML=`<div>${[...LIST,...LIST].map(a=>`<a href="#${a.slug}">${esc(a.short)}</a>`).join("")}</div>`}
+const pubBox=`<div class="box"><h3>الناشر</h3><div class="pub"><img src="anas.jpg" alt="${AUTHOR}"><div><b>${AUTHOR}</b><div class="tag">الناشر ورئيس التحرير</div></div></div><p>عضو هيئة تدريس في كلية الإعلام بجامعة الشرق الأوسط، وصانع محتوى تقني يقدّم أخبار التقنية والذكاء الاصطناعي للجمهور العربي.</p><a class="btn" href="#publisher" style="margin-top:14px">السيرة الكاملة<span>‹</span></a></div>`;
+function home(){
+ const L=LIST[0],rest=LIST.slice(1),mr=[...LIST].slice(0,5);
+ return `<section class="hero"><div class="ghost" aria-hidden="true">ميديا اتش</div><div class="wrap"><div class="hgrid">
+  <div><span class="pill"><i></i>${esc(CATS[L.cat])} · ${esc(L.type)}</span><h1><a href="#${L.slug}">${esc(L.title)}</a></h1><p class="dek">${esc(L.dek)}</p>${by(L)}<div style="margin-top:22px"><a class="btn" href="#${L.slug}">اقرأ ${L.type==="تقرير"?"التقرير":L.type==="قصة إخبارية"?"القصة":"الخبر"} كاملاً<span>‹</span></a></div></div>
+  <a class="monitor" href="#${L.slug}" aria-label="${esc(L.short)}"><span class="rule-v" style="height:140%;top:-20%;inset-inline-start:-18px"></span><span class="rule-h" style="width:130%;bottom:-16px;inset-inline-start:-15%"></span><span class="node" style="inset-inline-start:-22px;bottom:-20px"></span><img src="${esc(imgOf(L))}" alt="">${vidOf(L)?'<span class="pill play"><i></i>مع تقرير مصوّر</span>':""}</a>
+ </div></div></section>
+ <section class="sec"><div class="wrap split"><div><div class="sh"><h2>آخر الأخبار</h2>${OWNER?'<button class="btn" type="button" data-new>خبر جديد<span>+</span></button>':""}</div><div class="grid feat">${rest.map(card).join("")}</div></div>
+  <aside class="rail"><div class="box"><h3>الأكثر قراءة</h3><ol class="mr">${[mr[0],mr[2],mr[1],mr[5]||mr[3],mr[4]].filter(Boolean).map(a=>`<li><a href="#${a.slug}">${esc(a.short)}</a></li>`).join("")}</ol></div>${pubBox}</aside></div></section>
+ <section class="sec"><div class="wrap"><div class="sh"><h2>فيديو ميديا اتش</h2><div class="arrows"><button type="button" data-s="1" aria-label="السابق">›</button><button type="button" data-s="-1" aria-label="التالي">‹</button></div></div>
+  <div class="strip" id="strip">${LIST.filter(a=>vidOf(a)).map(a=>`<a class="vc" href="#${a.slug}">${a.img?`<img src="${esc(a.img)}" alt="" loading="lazy">`:`<video src="${esc(vidOf(a))}" muted preload="metadata"></video>`}<span class="pill pl"><i></i>شاهد</span><span class="cap">${esc(a.short)}</span></a>`).join("")}</div></div></section>`;
+}
+function cat(k){
+ const list=LIST.filter(a=>a.cat===k);
+ return `<section class="sec" style="border:0"><div class="wrap"><div class="crumb"><a href="#">الرئيسية</a><span>›</span><span>${CATS[k]}</span></div><div class="sh" style="margin-top:14px"><h2>${CATS[k]}</h2><span class="note">${list.length} ${list.length>2&&list.length<11?"مواد":"مادة"}</span></div><div class="grid">${list.map(card).join("")||'<p class="note">لا مواد في هذا القسم بعد.</p>'}</div></div></section>`;
+}
+function article(a){
+ const url=(SITE||location.href.split("#")[0])+"#"+a.slug;
+ const rel=LIST.filter(x=>x!==a).slice(0,3);
+ const body=a.text!=null?textToHtml(a.text):a.body;
+ const v=vidOf(a),lay=v?(a.vlayout||"side"):"none";
+ const vEl=`<video src="${esc(v)}" ${a.img?`poster="${esc(a.img)}"`:""} controls playsinline preload="metadata"></video>`;
+ const cap=`<figcaption>المادة المصوّرة: ${esc(a.short)} – إعداد وتقديم ${AUTHOR}.</figcaption>`;
+ let bodyHtml=body;
+ if(lay==="inline"){const parts=body.split("</p>");const at=Math.min(2,parts.length-1);bodyHtml=parts.slice(0,at).join("</p>")+"</p>"+`<figure class="vinline"><div class="vframe">${vEl}</div>${cap}</figure>`+parts.slice(at).join("</p>")}
+ return `<div class="wrap"><div class="crumb"><a href="#">الرئيسية</a><span>›</span><a href="#cat-${a.cat}">${esc(CATS[a.cat])}</a><span>›</span><span>${esc(a.type)}</span></div>
+ <header class="ah"><span class="pill"><i></i>${esc(CATS[a.cat])} · ${esc(a.type)}</span><h1>${esc(a.title)}</h1><p class="dek">${esc(a.dek)}</p>${by(a)}
+  <div class="share"><button class="btn" type="button" id="copy">نسخ رابط الخبر<span>⧉</span></button><input id="perma" readonly value="${esc(url)}" aria-label="رابط الخبر">${OWNER?`<button class="btn" type="button" data-edit="${a.slug}">تعديل الخبر<span>✎</span></button>`:""}</div></header>
+ ${lay==="top"?`<section class="vtop" style="--bgimg:url('${esc(imgOf(a))}')"><figure><div class="vframe">${vEl}</div>${cap}</figure></section>`:""}
+ <div class="agrid${lay==="side"?"":" solo"}"><article class="body">${lay==="top"?"":`<figure class="thumbfig"><img src="${esc(imgOf(a))}" alt=""></figure>`}${bodyHtml}
+  <div class="tags">${(a.tags||[]).map(t=>`<span class="pill">${esc(t)}</span>`).join("")}</div>
+  ${(a.sources||[]).length?`<section class="src"><h3>المصادر</h3><ol>${a.sources.map(s=>safeUrl(s[1])?`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0]||s[1])}</a></li>`:`<li>${esc(s[0])}</li>`).join("")}</ol></section>`:""}</article>
+  ${lay==="side"?`<figure class="vbox" style="margin:0"><div class="vframe">${vEl}</div>${cap}</figure>`:""}</div></div>
+ <section class="sec"><div class="wrap"><div class="sh"><h2>اقرأ أيضاً</h2></div><div class="grid">${rel.map(card).join("")}</div></div></section>`;
+}
+function publisher(){
+ const jobs=[["جامعة الشرق الأوسط – عمان","عضو هيئة تدريس – كلية الإعلام","حالياً","التدريس في كلية الإعلام وتأهيل الطلبة في مجالات الإنتاج الإعلامي والمرئي."],["منصات التواصل الاجتماعي","صانع محتوى تقني","حالياً","تقديم محتوى مصوّر يشرح أخبار التقنية والذكاء الاصطناعي وأدواته للجمهور العربي بأسلوب مبسّط."],["جامعة البترا – عمان","مشرف استوديو تلفزيوني","2026","الإشراف على العمليات اليومية لاستوديو كلية الإعلام، وإدارة جلسات التسجيل والتجهيزات التقنية، ودعم الطلبة في تنفيذ إنتاجات إعلامية بمعايير مهنية."],["موقع صراحة نيوز – عمان","صانع محتوى ومصوّر ومونتير","2025","إنتاج محتوى رقمي متعدد الوسائط، يشمل التصوير الميداني والمونتاج الإبداعي للمنصات الرقمية."],["منصة نبض الأردن – عمان","مصوّر ومونتير مستقل","2023 – 2024","تصوير ومونتاج تقارير ومواد مصوّرة حول قضايا اجتماعية ومجتمعية."],["منصة الماهر التعليمية – عمان","مصوّر ومونتير","2022","تصوير ومونتاج دروس تعليمية لطلبة المدارس والثانوية العامة."]];
+ const aw=[["تمثيل الأردن في مهرجان الشباب العالمي","نيجني نوفغورود، روسيا – أيلول 2025."],["برنامج القيادات الإعلامية العربية الشابة","الإمارات العربية المتحدة – أيار 2025، بتنظيم مركز الشباب العربي."],["جائزة أفضل منتج إعلامي – المحتوى القصير","المركز الأول، معهد الإعلام الأردني والجمعية الملكية للتوعية الصحية – آب 2024."],["منحة صندوق الابتكار","بالشراكة مع المركز الدولي للصحفيين (ICFJ) لإنتاج بودكاست – 2024."],["جائزة أفضل تقرير إنساني","مسابقة الإعلاميين – مؤسسة الحسين للسرطان (2019–2020)."],["جائزة أفضل فيلم – مكافحة التطرف وخطاب الكراهية","فيلم «Terror Company» بالتعاون مع مديرية الأمن العام والسفارة الأسترالية – 2021."],["منحة إبداعية من مؤسسة مشكاة المجتمعية","لإنتاج فيلم قصير سريالي عن الأثر النفسي والاجتماعي لمواقع التواصل – 2022."]];
+ return `<div class="wrap"><section class="phero"><div class="monitor"><img src="anas.jpg" alt="${AUTHOR}"></div><div><span class="pill"><i></i>الناشر ورئيس التحرير</span><h1>${AUTHOR}</h1><p class="role">عضو هيئة تدريس في كلية الإعلام – جامعة الشرق الأوسط · صانع محتوى تقني</p><p class="dek">عضو هيئة تدريس في كلية الإعلام بجامعة الشرق الأوسط، وصانع محتوى تقني يقدّم أخبار التقنية والذكاء الاصطناعي وأدواته للجمهور العربي بأسلوب مبسّط. يمتلك خبرة تتجاوز أربع سنوات في صناعة المحتوى وسبع سنوات في التصوير والمونتاج، وعمل مشرفاً للاستوديو التلفزيوني في جامعة البترا ومدرّباً إعلامياً. يتخصص في السرد البصري وإنتاج المحتوى الاجتماعي والإنساني باستخدام تقنيات الإنتاج الحديثة وأدوات الذكاء الاصطناعي، وأسهم في حملات توعية ومشاريع مناصرة مع مؤسسات محلية ودولية.</p><div class="by"><span>البريد الإلكتروني:</span><b style="direction:ltr">anasabusneineh7@gmail.com</b></div></div></section>
+ <section class="sec"><div class="two"><div><div class="sh"><h2>الخبرات</h2></div><ul class="tl">${jobs.map(j=>`<li><b>${j[1]}</b><span>${j[0]} · ${j[2]}</span><p>${j[3]}</p></li>`).join("")}</ul>
+  <div class="sh" style="margin-top:28px"><h2>التعليم</h2></div><ul class="tl"><li><b>بكالوريوس الإعلام – قسم الإذاعة والتلفزيون</b><span>جامعة الزرقاء · 2021</span></li></ul></div>
+  <div><div class="sh"><h2>الجوائز والمنح</h2></div><ul class="aw">${aw.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join("")}</ul></div></div></section>
+ <section class="sec"><div class="sh"><h2>منشورات الناشر</h2></div><div class="grid">${LIST.map(card).join("")}</div></section></div>`;
+}
+const lock=(id,fill,sub)=>`<div class="lockup"><svg viewBox="0 0 120 120" style="color:${fill||"#A2CCFF"}"><use href="#${id}"/></svg><span><b>ميديا اتش</b><small style="${sub||""}">MEDIA H</small></span></div>`;
+function identity(){
+ const C=[["ليل","#03050C","الخلفية الأساسية لكل المنصات"],["عمق","#070C1B","الألواح والبطاقات"],["أزرق ملكي","#1F4DFF","لون العلامة الأساسي"],["لازوردي","#3D8BFF","التوهج والروابط النشطة"],["جليدي","#AFCBFF","الإبراز والتصنيفات"],["فولاذي","#2E6FB0","الإطارات والخطوط الثانوية"],["أبيض","#EEF3FF","النصوص والأيقونات"]];
+ return `<div class="wrap"><div class="crumb"><a href="#">الرئيسية</a><span>›</span><span>الهوية البصرية</span></div>
+ <section style="padding:18px 0 30px"><div class="sh"><h2>الهوية البصرية لميديا اتش</h2></div>
+  <div class="idlogo"><span class="rule-h" style="width:80%;top:22%;inset-inline-start:10%"></span><span class="rule-v" style="height:80%;top:10%;inset-inline-start:24%"></span><span class="node" style="top:calc(22% - 4px);inset-inline-start:calc(24% - 4px)"></span>${lock("mark")}</div>
+  <p class="dek" style="margin-top:20px">الشعار أيقونة زجاجية مربعة بزوايا مستديرة تتوهج بالأزرق، في داخلها حرف H مائل بخطوط حادة يتجه إلى الأمام، يرافقه مثلث صغير يشير إلى «البث» وانطلاق الخبر. صُمم ليعمل أيقونةً للتطبيقات ومنصات التواصل، وليبقى واضحاً بأصغر الأحجام.</p>
+  <div class="vars"><div class="var" style="background:#03050C">${lock("mark")}</div><div class="var" style="background:#1F4DFF">${lock("mono","#fff","color:#fff")}</div><div class="var" style="background:#EEF3FF;color:#03050C">${lock("mono","#1F4DFF","color:#1F4DFF")}</div><div class="var" style="background:#070C1B"><svg viewBox="0 0 120 120" width="96" height="96" style="filter:drop-shadow(0 0 16px rgba(61,123,255,.6))"><use href="#mark"/></svg></div></div></section>
+ <section class="sec"><div class="sh"><h2>الألوان</h2></div><div class="sw">${C.map(c=>`<div><i style="background:${c[1]}"></i><p><b>${c[0]}</b><code>${c[1]}</code><br>${c[2]}</p></div>`).join("")}</div></section>
+ <section class="sec"><div class="sh"><h2>الخطوط</h2></div><div class="two"><div class="spec"><span class="tag">العناوين · Alexandria</span><div class="big">التقنية بلغة الخبر</div><p class="note">وزن 800 للعناوين، 600 للتصنيفات، 400 للنصوص القصيرة.</p></div><div class="spec"><span class="tag">نص القراءة · Noto Naskh Arabic</span><p class="rd">خطّ نسخي واضح للفقرات الطويلة، بحجم 19 بكسل وتباعد أسطر مريح يناسب القراءة على الشاشات.</p></div></div></section>
+ <section class="sec"><div class="sh"><h2>عناصر الواجهة والأسلوب التحريري</h2></div><div class="two"><div class="spec"><div style="display:flex;gap:10px;flex-wrap:wrap"><span class="pill solid"><i></i>عاجل</span><span class="pill"><i></i>ذكاء اصطناعي</span><span class="pill"><i></i>تقرير مصوّر</span></div><p class="note" style="font-size:15px;line-height:1.9">كبسولات بنقطة مضيئة للتصنيفات، وخطوط شعرية متقاطعة تنتهي بعُقد بيضاء، وإطارات زجاجية للصور والفيديو.</p></div>
+  <div class="spec"><ul class="aw"><li><b>الهرم المقلوب</b>الأهم أولاً: من، ماذا، متى، أين، ولماذا في الفقرة الأولى.</li><li><b>الإسناد</b>كل معلومة منسوبة إلى مصدرها، ولا تُقدَّم الاتهامات بوصفها حقائق.</li><li><b>المصادر</b>روابط المصادر مرفقة في نهاية كل مادة.</li></ul></div></div></section></div>`;
+}
+
+function route(){
+ const r=location.hash.slice(1);
+ document.querySelectorAll("#app video").forEach(v=>v.pause());
+ const a=LIST.find(x=>x.slug===r);
+ let title="أخبار التقنية";
+ if(a){app.innerHTML=article(a);title=a.short}
+ else if(r.startsWith("cat-")&&CATS[r.slice(4)]){app.innerHTML=cat(r.slice(4));title=CATS[r.slice(4)]}
+ else if(r==="publisher"){app.innerHTML=publisher();title="الناشر"}
+ else if(r==="identity"){app.innerHTML=identity();title="الهوية البصرية"}
+ else app.innerHTML=home();
+ document.title="ميديا اتش | "+title;
+ const on=a?"cat-"+a.cat:r;
+ document.querySelectorAll("#nav a").forEach(n=>n.classList.toggle("on",n.dataset.r===on));
+ loadVideos();
+}
+function loadVideos(){
+ document.querySelectorAll("#app video[src]").forEach(v=>{
+  if(v.dataset.ok)return;v.dataset.ok=1;const src=v.getAttribute("src");let done=false;
+  const fallback=()=>{if(done)return;done=true;fetch(src).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{v.src=URL.createObjectURL(b.type?b:new Blob([b],{type:"video/mp4"}))}).catch(()=>{})};
+  v.addEventListener("loadedmetadata",()=>{done=true},{once:true});
+  v.addEventListener("error",fallback,{once:true});
+  setTimeout(()=>{if(v.readyState<1)fallback()},5000);
+ });
+}
+function go(){route();window.scrollTo(0,0)}
+app.addEventListener("click",e=>{
+ const s=e.target.closest("[data-s]");
+ if(s){const st=document.getElementById("strip");st.scrollBy({left:(+s.dataset.s)*st.clientWidth*.8,behavior:"smooth"})}
+ if(e.target.closest("#copy")){const i=document.getElementById("perma"),b=e.target.closest("#copy");
+  const done=()=>{b.firstChild.textContent="تم نسخ الرابط";setTimeout(()=>b.firstChild.textContent="نسخ رابط الخبر",1800)};
+  try{navigator.clipboard.writeText(i.value).then(done,()=>{i.select();done()})}catch(err){i.select()}}
+});
+document.addEventListener("keydown",e=>{const st=document.getElementById("strip");if(!st||!["ArrowLeft","ArrowRight"].includes(e.key)||e.target.closest("input,textarea,video,dialog"))return;st.scrollBy({left:(e.key==="ArrowLeft"?-1:1)*st.clientWidth*.8,behavior:"smooth"})});
+window.addEventListener("hashchange",go);
+ticker();route();
+}
+</script>
+</body>
+</html>
